@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     let addAdressButton : UIButton = {
        let button = UIButton()
-        button.setTitle("Adres", for: .normal)
+        button.setImage(UIImage(named: "AddAdress"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
   
     let routeButton : UIButton = {
        let button = UIButton()
-        button.setTitle("Route", for: .normal)
+        button.setImage(UIImage(named: "Route"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
         return button
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
     
     let resetButton : UIButton = {
        let button = UIButton()
-        button.setTitle("Reset", for: .normal)
+        button.setImage(UIImage(named: "Reset"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
         return button

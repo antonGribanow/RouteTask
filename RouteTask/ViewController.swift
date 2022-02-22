@@ -54,7 +54,9 @@ class ViewController: UIViewController {
     }
     
     @objc func addAdressButtonTapped() {
-        print("TapAdd")
+        alertAddAdress(title: "Add", placeholder: "Write Adress") { (text) in
+            print(text)
+        }
     }
     
     @objc func routeButtonTapped() {

@@ -74,7 +74,12 @@ class ViewController: UIViewController {
     }
     
     @objc func resetButtonTapped() {
-        print("TapReset")
+
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotation(mapView.annotations) // problem
+        annotationArray = [MKPointAnnotation]()
+        routeButton.isHidden = true
+        resetButton.isHidden = true
     }
     
     private func setupPlacemark(adressPlase: String) {

@@ -42,6 +42,9 @@ class ViewController: UIViewController {
         return button
         
     }()
+    
+    var annotationArray = [MKPointAnnotation]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +57,8 @@ class ViewController: UIViewController {
     }
     
     @objc func addAdressButtonTapped() {
-        alertAddAdress(title: "Add", placeholder: "Write Adress") { (text) in
-            print(text)
+        alertAddAdress(title: "Add", placeholder: "Write Adress") { [self] (text) in
+            setupPlacemark(adressPlase: text)
         }
     }
     
@@ -65,6 +68,36 @@ class ViewController: UIViewController {
     
     @objc func resetButtonTapped() {
         print("TapReset")
+    }
+    
+    private func setupPlacemark(adressPlase: String) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(adressPlase) { [self] (placemarks, error) in
+            
+            if let error = error{
+                print(error)
+                alertError(title: "Error", message: "Server is unavalibe")
+                return
+            }
+            
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks.first
+            
+            let annotation = MKPointAnnotation()
+            annotation.title = "\(adressPlase)"
+            guard let placemarkLocation = placemark?.location else { return }
+            annotation.coordinate = placemarkLocation.coordinate
+            
+            annotationArray.append(annotation)
+            
+            if annotationArray.count > 2 {
+                routeButton.isHidden = false
+                resetButton.isHidden = false
+            }
+            
+            mapView.showAnnotations(annotationArray, animated: true)
+        }
     }
 }
 
